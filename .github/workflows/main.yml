@@ -6,11 +6,12 @@ on:
       - master
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   clone_repo:
     runs-on: macOS
-    permissions:
-      contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
