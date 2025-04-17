@@ -24,9 +24,9 @@ jobs:
         run: |
           flutter config --enable-web
           flutter pub get
-
+  build_flutter:
+    runs-on: macOS
+    steps:
       - name: Build
         run: |
           flutter build web
-          flutter build ios
-          flutter build android
