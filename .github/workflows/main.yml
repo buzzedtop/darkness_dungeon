@@ -32,3 +32,19 @@ jobs:
       - name: Build
         run: |
           flutter build web
+
+  build_flutter_ios:
+    needs: clone_repo
+    runs-on: macOS
+    steps:
+      - name: Build
+        run: |
+          flutter build ios
+
+  build_flutter_android:
+    needs: clone_repo
+    runs-on: macOS
+    steps:
+      - name: Build
+        run: |
+          flutter build android
