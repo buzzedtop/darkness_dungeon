@@ -24,7 +24,9 @@ jobs:
         run: |
           flutter config --enable-web
           flutter pub get
-  build_flutter:
+          
+  build_flutter_web:
+    needs: clone_repo
     runs-on: macOS
     steps:
       - name: Build
