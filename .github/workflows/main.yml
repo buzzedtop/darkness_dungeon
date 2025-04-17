@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  deploy:
+  clone_repo:
     runs-on: macOS
     permissions:
       contents: write
@@ -26,4 +26,7 @@ jobs:
           flutter pub get
 
       - name: Build
-        run: flutter build web
+        run: |
+          flutter build web
+          flutter build ios
+          flutter build android
