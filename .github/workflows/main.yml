@@ -47,4 +47,21 @@ jobs:
     steps:
       - name: Build
         run: |
-          flutter build android
+          flutter build apk --split-per-abi
+
+  build_flutter_macos:
+    needs: clone_repo
+    runs-on: macOS
+    steps:
+      - name: Build
+        run: |
+          flutter build macos
+
+  build_flutter_linux:
+    needs: clone_repo
+    runs-on: macOS
+    steps:
+      - name: Build
+        run: |
+          flutter build linux
+
