@@ -51,18 +51,18 @@ class GameState extends State<Game> {
       ),
       actions: [
       JoystickAction(
+        actionId: 1,
+        sprite: Sprite.load('joystick_atack_range.png'),
+        spritePressed: Sprite.load('joystick_atack_range_selected.png'),
+        size: 50,
+        margin: const EdgeInsets.only(bottom: 140, right: 50),
+      ),
+      JoystickAction(
         actionId: 0,
         sprite: Sprite.load('joystick_atack.png'),
         spritePressed: Sprite.load('joystick_atack_selected.png'),
         size: 80,
         margin: const EdgeInsets.only(bottom: 50, right: 50),
-      ),
-      JoystickAction(
-        actionId: 1,
-        sprite: Sprite.load('joystick_atack_range.png'),
-        spritePressed: Sprite.load('joystick_atack_range_selected.png'),
-        size: 50,
-        margin: const EdgeInsets.only(bottom: 50, right: 160),
       ),
       ],
     );
