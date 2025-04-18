@@ -70,7 +70,7 @@ class Goblin extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   }
 
   @override
-  void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic id) {
+  void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic identify) {
     showDamage(
       damage,
       config: TextStyle(
@@ -79,6 +79,6 @@ class Goblin extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
         fontFamily: 'Normal',
       ),
     );
-    super.onReceiveDamage(attacker, damage, id);
+    super.onReceiveDamage(attacker, damage, identify);
   }
 }

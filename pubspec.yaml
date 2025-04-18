@@ -72,7 +72,7 @@ flutter:
   fonts:
    - family: Normal
      fonts:
-       - asset: fonts/font_pixel.ttf
+       - asset: fonts/LinLibertine_Mah.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

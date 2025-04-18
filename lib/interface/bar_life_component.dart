@@ -21,7 +21,7 @@ class MyBarLifeComponent extends InterfaceComponent {
         );
 
   @override
-  void update(double t) {
+  void update(double dt) {
     if (gameRef.player != null) {
       life = gameRef.player!.life;
       maxLife = gameRef.player!.maxLife;
@@ -29,7 +29,7 @@ class MyBarLifeComponent extends InterfaceComponent {
         stamina = (gameRef.player as Knight).stamina;
       }
     }
-    super.update(t);
+    super.update(dt);
   }
 
   @override
@@ -37,7 +37,9 @@ class MyBarLifeComponent extends InterfaceComponent {
     try {
       _drawLife(c);
       _drawStamina(c);
-    } catch (e) {}
+    } catch (e) {
+      // Intentionally left empty to handle rendering errors gracefully.
+    }
     super.render(c);
   }
 

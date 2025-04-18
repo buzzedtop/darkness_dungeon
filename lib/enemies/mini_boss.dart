@@ -91,7 +91,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
       lightingConfig: LightingConfig(
         radius: tileSize * 0.9,
         blurBorder: tileSize / 2,
-        color: Colors.deepOrangeAccent.withOpacity(0.4),
+        color: Colors.deepOrangeAccent.withAlpha((0.4 * 255).toInt()),
       ),
     );
   }

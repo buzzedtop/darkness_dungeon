@@ -11,9 +11,9 @@ class DoorKey extends GameDecoration with Sensor {
         );
 
   @override
-  void onContact(GameComponent collision) {
-    if (collision is Knight) {
-      collision.containKey = true;
+  void onContact(GameComponent component) {
+    if (component is Knight) {
+      component.containKey = true;
       removeFromParent();
     }
   }

@@ -28,7 +28,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
       LightingConfig(
         radius: width * 1.5,
         blurBorder: width,
-        color: Colors.deepOrangeAccent.withOpacity(0.2),
+        color: Colors.deepOrangeAccent.withAlpha((0.2 * 255).toInt()),
       ),
     );
     setupMovementByJoystick(intensityEnabled: true);
@@ -124,7 +124,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
       lightingConfig: LightingConfig(
         radius: tileSize * 0.9,
         blurBorder: tileSize / 2,
-        color: Colors.deepOrangeAccent.withOpacity(0.4),
+        color: Colors.deepOrangeAccent.withAlpha((0.4 * 255).toInt()),
       ),
     );
   }
@@ -173,7 +173,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
   }
 
   @override
-  void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic id) {
+  void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic identify) {
     if (isDead) return;
     showDamage(
       damage,
@@ -183,7 +183,7 @@ class Knight extends SimplePlayer with Lighting, BlockMovementCollision {
         fontFamily: 'Normal',
       ),
     );
-    super.onReceiveDamage(attacker, damage, id);
+    super.onReceiveDamage(attacker, damage, identify);
   }
 
   void _showEmote({String emote = 'emote/emote_exclamacao.png'}) {

@@ -15,8 +15,8 @@ class Spikes extends GameDecoration with Sensor<Knight> {
         );
 
   @override
-  void onContact(Knight collision) {
-    player = collision;
+  void onContact(Knight component) {
+    player = component;
   }
 
   @override

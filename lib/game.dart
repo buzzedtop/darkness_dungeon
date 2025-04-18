@@ -56,7 +56,6 @@ class GameState extends State<Game> {
         spritePressed: Sprite.load('joystick_atack_range_selected.png'),
         size: 50,
         margin: const EdgeInsets.only(bottom: 140, right: 50),
-        color: Colors.red, // Change the color here
       ),
       JoystickAction(
         actionId: 0,
@@ -105,7 +104,7 @@ class GameState extends State<Game> {
         ),
         components: [GameController()],
         interface: KnightInterface(),
-        lightingColorGame: Colors.black.withOpacity(0.6),
+        lightingColorGame: Colors.black.withAlpha((0.6 * 255).toInt()),
         backgroundColor: Colors.grey[900]!,
         cameraConfig: CameraConfig(
           speed: 3,

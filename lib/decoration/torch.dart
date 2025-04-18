@@ -16,7 +16,7 @@ class Torch extends GameDecoration {
         radius: width * 2.5,
         blurBorder: width,
         pulseVariation: 0.1,
-        color: Colors.deepOrangeAccent.withOpacity(0.2),
+        color: Colors.deepOrangeAccent.withAlpha((0.2 * 255).toInt()),
       ),
     );
   }

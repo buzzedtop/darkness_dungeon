@@ -16,10 +16,10 @@ class PotionLife extends GameDecoration with Sensor<Knight> {
         );
 
   @override
-  void onContact(Knight player) {
+  void onContact(Knight component) {
     if (!hasContact) {
       hasContact = true;
-      _giveLife(player);
+      _giveLife(component);
       removeFromParent();
     }
   }
