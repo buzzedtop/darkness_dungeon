@@ -20,18 +20,18 @@ class MyLocalizations {
 
   Future<bool> load() async {
     String data = await rootBundle
-        .loadString('resources/lang/${this.locale.languageCode}.json');
-    Map<String, dynamic> _result = json.decode(data);
+        .loadString('resources/lang/${locale.languageCode}.json');
+    Map<String, dynamic> result = json.decode(data);
 
-    this._sentences = new Map();
-    _result.forEach((String key, dynamic value) {
-      this._sentences[key] = value.toString();
+    _sentences = <String, String>{};
+    result.forEach((String key, dynamic value) {
+      _sentences[key] = value.toString();
     });
 
     return true;
   }
 
   String trans(String key) {
-    return this._sentences[key] ?? '';
+    return _sentences[key] ?? '';
   }
 }

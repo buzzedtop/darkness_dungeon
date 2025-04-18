@@ -29,8 +29,8 @@ class Game extends StatefulWidget {
 class GameState extends State<Game> {
   @override
   void initState() {
-    Sounds.playBackgroundSound();
     super.initState();
+    Sounds.playBackgroundSound();
   }
 
   @override
@@ -43,26 +43,27 @@ class GameState extends State<Game> {
   Widget build(BuildContext context) {
     PlayerController joystick = Joystick(
       directional: JoystickDirectional(
-        spriteBackgroundDirectional: Sprite.load('joystick_background.png'),
-        spriteKnobDirectional: Sprite.load('joystick_knob.png'),
-        size: 100,
-        isFixed: false,
+      spriteBackgroundDirectional: Sprite.load('joystick_background.png'),
+      spriteKnobDirectional: Sprite.load('joystick_knob.png'),
+      size: 100,
+      isFixed: false, // Allows the joystick to float and appear where the user touches
+      margin: const EdgeInsets.only(left: 20, bottom: 20), // Adjusts position
       ),
       actions: [
-        JoystickAction(
-          actionId: 0,
-          sprite: Sprite.load('joystick_atack.png'),
-          spritePressed: Sprite.load('joystick_atack_selected.png'),
-          size: 80,
-          margin: EdgeInsets.only(bottom: 50, right: 50),
-        ),
-        JoystickAction(
-          actionId: 1,
-          sprite: Sprite.load('joystick_atack_range.png'),
-          spritePressed: Sprite.load('joystick_atack_range_selected.png'),
-          size: 50,
-          margin: EdgeInsets.only(bottom: 50, right: 160),
-        )
+      JoystickAction(
+        actionId: 0,
+        sprite: Sprite.load('joystick_atack.png'),
+        spritePressed: Sprite.load('joystick_atack_selected.png'),
+        size: 80,
+        margin: const EdgeInsets.only(bottom: 50, right: 50),
+      ),
+      JoystickAction(
+        actionId: 1,
+        sprite: Sprite.load('joystick_atack_range.png'),
+        spritePressed: Sprite.load('joystick_atack_range_selected.png'),
+        size: 50,
+        margin: const EdgeInsets.only(bottom: 50, right: 160),
+      ),
       ],
     );
 
@@ -81,12 +82,8 @@ class GameState extends State<Game> {
     return Material(
       color: Colors.transparent,
       child: BonfireWidget(
-        playerControllers: [
-          joystick,
-        ],
-        player: Knight(
-          Vector2(2 * tileSize, 3 * tileSize),
-        ),
+        playerControllers: [joystick],
+        player: Knight(Vector2(2 * tileSize, 3 * tileSize)),
         map: WorldMapByTiled(
           WorldMapReader.fromAsset('tiled/map.json'),
           forceTileSize: Vector2(tileSize, tileSize),
@@ -113,6 +110,7 @@ class GameState extends State<Game> {
           speed: 3,
           zoom: getZoomFromMaxVisibleTile(context, tileSize, 18),
         ),
+        // Uncomment the following block if you want to show a loading progress indicator
         // progress: Container(
         //   color: Colors.black,
         //   child: Center(

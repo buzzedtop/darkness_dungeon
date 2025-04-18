@@ -11,7 +11,7 @@ class MyLocalizationsDelegate extends LocalizationsDelegate<MyLocalizations> {
 
   @override
   Future<MyLocalizations> load(Locale locale) async {
-    MyLocalizations localizations = new MyLocalizations(locale);
+    MyLocalizations localizations = MyLocalizations(locale);
     await localizations.load();
     print("Load ${locale.languageCode}");
     return localizations;

@@ -28,7 +28,7 @@ class WizardNPC extends SimpleNpc {
   void update(double dt) {
     super.update(dt);
     if (gameRef.player != null) {
-      this.seeComponent(
+      seeComponent(
         gameRef.player!,
         observed: (player) {
           if (!_showConversation) {

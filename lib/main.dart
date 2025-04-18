@@ -9,14 +9,32 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'util/sounds.dart';
 
 double tileSize = 32;
+
+void initializeDeviceSettings() async {
+  if (!kIsWeb) {
+    try {
+      await Flame.device.setLandscape();
+      await Flame.device.fullScreen();
+    } catch (e) {
+      // Log or handle the error
+      print('Error setting device settings: $e');
+    }
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kIsWeb) {
-    await Flame.device.setLandscape();
-    await Flame.device.fullScreen();
-  }
+
+  // Configure device settings for non-web platforms
+  initializeDeviceSettings();
+
+  // Initialize game sounds
   await Sounds.initialize();
+
+  // Localization delegate
   MyLocalizationsDelegate myLocation = const MyLocalizationsDelegate();
+
+  // Run the app
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -52,7 +52,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   @override
   void update(double dt) {
     if (!firstSeePlayer) {
-      this.seePlayer(
+      seePlayer(
         observed: (p) {
           firstSeePlayer = true;
           gameRef.camera.moveToTargetAnimated(
@@ -65,7 +65,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
       );
     }
 
-    if (life < 150 && childrenEnemy.length == 0) {
+    if (life < 150 && childrenEnemy.isEmpty) {
       addChildInMap(dt);
     }
 
@@ -77,7 +77,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
       addChildInMap(dt);
     }
 
-    this.seeAndMoveToPlayer(
+    seeAndMoveToPlayer(
       closePlayer: (player) {
         execAttack();
       },
@@ -92,14 +92,14 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
     gameRef.add(
       AnimatedGameObject(
         animation: GameSpriteSheet.explosion(),
-        position: this.position,
+        position: position,
         size: Vector2(32, 32),
         loop: false,
       ),
     );
-    childrenEnemy.forEach((e) {
+    for (var e in childrenEnemy) {
       if (!e.isDead) e.onDie();
-    });
+    }
     removeFromParent();
     super.onDie();
   }
@@ -108,18 +108,18 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
     if (checkInterval('addChild', 2000, dt)) {
       Vector2 positionExplosion = Vector2.zero();
 
-      switch (this.directionThePlayerIsIn()) {
+      switch (directionThePlayerIsIn()) {
         case Direction.left:
-          positionExplosion = this.position.translated(width * -2, 0);
+          positionExplosion = position.translated(width * -2, 0);
           break;
         case Direction.right:
-          positionExplosion = this.position.translated(width * 2, 0);
+          positionExplosion = position.translated(width * 2, 0);
           break;
         case Direction.up:
-          positionExplosion = this.position.translated(0, height * -2);
+          positionExplosion = position.translated(0, height * -2);
           break;
         case Direction.down:
-          positionExplosion = this.position.translated(0, height * 2);
+          positionExplosion = position.translated(0, height * 2);
           break;
         case Direction.upLeft:
         case Direction.upRight:
@@ -158,7 +158,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   }
 
   void execAttack() {
-    this.simpleAttackMelee(
+    simpleAttackMelee(
       size: Vector2.all(tileSize * 0.62),
       damage: attack,
       interval: 1500,
@@ -171,7 +171,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
 
   @override
   void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic id) {
-    this.showDamage(
+    showDamage(
       damage,
       config: TextStyle(
         fontSize: valueByTileSize(5),
@@ -185,7 +185,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   void drawBarSummonEnemy(Canvas canvas) {
     double yPosition = 0;
     double widthBar = (width - 10) / 3;
-    if (childrenEnemy.length < 1)
+    if (childrenEnemy.isEmpty) {
       canvas.drawLine(
           Offset(0, yPosition),
           Offset(widthBar, yPosition),
@@ -193,9 +193,10 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
             ..color = Colors.orange
             ..strokeWidth = 1
             ..style = PaintingStyle.fill);
+    }
 
     double lastX = widthBar + 5;
-    if (childrenEnemy.length < 2)
+    if (childrenEnemy.length < 2) {
       canvas.drawLine(
           Offset(lastX, yPosition),
           Offset(lastX + widthBar, yPosition),
@@ -203,9 +204,10 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
             ..color = Colors.orange
             ..strokeWidth = 1
             ..style = PaintingStyle.fill);
+    }
 
     lastX = lastX + widthBar + 5;
-    if (childrenEnemy.length < 3)
+    if (childrenEnemy.length < 3) {
       canvas.drawLine(
           Offset(lastX, yPosition),
           Offset(lastX + widthBar, yPosition),
@@ -213,6 +215,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
             ..color = Colors.orange
             ..strokeWidth = 1
             ..style = PaintingStyle.fill);
+    }
   }
 
   void _showConversation() {

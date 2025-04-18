@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatefulWidget {
+  const Menu({Key? key}) : super(key: key);
+
   @override
   _MenuState createState() => _MenuState();
 }
@@ -21,6 +23,7 @@ class _MenuState extends State<Menu> {
   bool showSplash = true;
   int currentPosition = 0;
   late async.Timer _timer;
+
   List<Future<SpriteAnimation>> sprites = [
     PlayerSpriteSheet.idleRight(),
     EnemySpriteSheet.goblinIdleRight(),
@@ -39,7 +42,7 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       child: showSplash ? buildSplash() : buildMenu(),
     );
   }
@@ -52,14 +55,15 @@ class _MenuState extends State<Menu> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
+              const Text(
                 "Darkness Dungeon",
                 style: TextStyle(
-                    color: Colors.white, fontFamily: 'Normal', fontSize: 30.0),
+                  color: Colors.white,
+                  fontFamily: 'Normal',
+                  fontSize: 30.0,
+                ),
               ),
-              SizedBox(
-                height: 20.0,
-              ),
+              const SizedBox(height: 20.0),
               if (sprites.isNotEmpty)
                 SizedBox(
                   height: 100,
@@ -68,9 +72,7 @@ class _MenuState extends State<Menu> {
                     animation: sprites[currentPosition],
                   ),
                 ),
-              SizedBox(
-                height: 30.0,
-              ),
+              const SizedBox(height: 30.0),
               SizedBox(
                 width: 150,
                 child: ElevatedButton(
@@ -79,11 +81,11 @@ class _MenuState extends State<Menu> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
-                    minimumSize: Size(100, 40), //////// HERE
+                    minimumSize: const Size(100, 40),
                   ),
                   child: Text(
                     getString('play_cap'),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'Normal',
                       fontSize: 17.0,
@@ -92,14 +94,12 @@ class _MenuState extends State<Menu> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Game()),
+                      MaterialPageRoute(builder: (context) => const Game()),
                     );
                   },
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               DefectorRadio<bool>(
                 value: false,
                 label: 'Keyboard',
@@ -110,9 +110,7 @@ class _MenuState extends State<Menu> {
                   });
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               DefectorRadio<bool>(
                 value: true,
                 group: Game.useJoystick,
@@ -123,9 +121,7 @@ class _MenuState extends State<Menu> {
                   });
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               if (!Game.useJoystick)
                 SizedBox(
                   height: 80,
@@ -139,7 +135,7 @@ class _MenuState extends State<Menu> {
       bottomNavigationBar: SafeArea(
         child: Container(
           height: 20,
-          margin: EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -149,16 +145,17 @@ class _MenuState extends State<Menu> {
                   children: <Widget>[
                     Text(
                       getString('powered_by'),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Normal',
-                          fontSize: 12.0),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Normal',
+                        fontSize: 12.0,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
                         _launchURL('https://github.com/RafaelBarbosatec');
                       },
-                      child: Text(
+                      child: const Text(
                         'rafaelbarbosatec',
                         style: TextStyle(
                           decoration: TextDecoration.underline,
@@ -167,7 +164,7 @@ class _MenuState extends State<Menu> {
                           fontSize: 12.0,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -177,17 +174,19 @@ class _MenuState extends State<Menu> {
                   children: <Widget>[
                     Text(
                       getString('built_with'),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Normal',
-                          fontSize: 12.0),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Normal',
+                        fontSize: 12.0,
+                      ),
                     ),
                     InkWell(
                       onTap: () {
                         _launchURL(
-                            'https://github.com/RafaelBarbosatec/bonfire');
+                          'https://github.com/RafaelBarbosatec/bonfire',
+                        );
                       },
-                      child: Text(
+                      child: const Text(
                         'Bonfire',
                         style: TextStyle(
                           decoration: TextDecoration.underline,
@@ -196,7 +195,7 @@ class _MenuState extends State<Menu> {
                           fontSize: 12.0,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -220,7 +219,7 @@ class _MenuState extends State<Menu> {
   }
 
   void startTimer() {
-    _timer = async.Timer.periodic(Duration(seconds: 2), (timer) {
+    _timer = async.Timer.periodic(const Duration(seconds: 2), (timer) {
       setState(() {
         currentPosition++;
         if (currentPosition > sprites.length - 1) {

@@ -1,7 +1,7 @@
 import 'package:darkness_dungeon/util/localization/my_localizations.dart';
 
 class StringsLocation {
-  static final StringsLocation _singleton = new StringsLocation._internal();
+  static final StringsLocation _singleton = StringsLocation._internal();
 
   static late MyLocalizations _myLocalizations;
 

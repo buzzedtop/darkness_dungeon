@@ -35,10 +35,10 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   void update(double dt) {
     super.update(dt);
     _seePlayerClose = false;
-    this.seePlayer(
+    seePlayer(
       observed: (player) {
         _seePlayerClose = true;
-        this.seeAndMoveToPlayer(
+        seeAndMoveToPlayer(
           closePlayer: (player) {
             execAttack();
           },
@@ -48,7 +48,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
       radiusVision: tileSize * 3,
     );
     if (!_seePlayerClose) {
-      this.seeAndMoveToAttackRange(
+      seeAndMoveToAttackRange(
         positioned: (p) {
           execAttackRange();
         },
@@ -62,7 +62,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
     gameRef.add(
       AnimatedGameObject(
         animation: GameSpriteSheet.smokeExplosion(),
-        position: this.position,
+        position: position,
         size: Vector2(32, 32),
         loop: false,
       ),
@@ -72,7 +72,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   }
 
   void execAttackRange() {
-    this.simpleAttackRange(
+    simpleAttackRange(
       animation: GameSpriteSheet.fireBallAttackRight(),
       animationDestroy: GameSpriteSheet.fireBallExplosion(),
       size: Vector2.all(tileSize * 0.65),
@@ -97,7 +97,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   }
 
   void execAttack() {
-    this.simpleAttackMelee(
+    simpleAttackMelee(
       size: Vector2.all(tileSize * 0.62),
       damage: attack / 3,
       interval: 300,
@@ -110,7 +110,7 @@ class MiniBoss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
 
   @override
   void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic id) {
-    this.showDamage(
+    showDamage(
       damage,
       config: TextStyle(
         fontSize: valueByTileSize(5),
