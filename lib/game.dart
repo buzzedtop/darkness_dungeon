@@ -56,6 +56,7 @@ class GameState extends State<Game> {
         spritePressed: Sprite.load('joystick_atack_range_selected.png'),
         size: 50,
         margin: const EdgeInsets.only(bottom: 140, right: 50),
+        color: Colors.red, // Change the color here
       ),
       JoystickAction(
         actionId: 0,
